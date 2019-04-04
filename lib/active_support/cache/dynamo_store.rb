@@ -49,16 +49,19 @@ module ActiveSupport
       #     pool: ::ConnectionPool.new(size: 1, timeout: 1) { ::Redis::Store::Factory.create("localhost:6379/0") })
       #     # => supply an existing connection pool (e.g. for use with redis-sentinel or redis-failover)
       def initialize()
+        $global_hash = {}
         super()
       end
 
       protected
       def read_entry(name, options = nil)
-        STDOUT << "\n\n #{name}, #{value}"
+        STDERR << "\n\n #{name}"
+        $global_hash[name]
       end
 
       def write_entry(name, value, options = nil)
-        STDOUT << "\n\n #{name}, #{value}"
+        STDERR << "\n\n #{name}, #{value}"
+        $global_hash[name] = value
       end
 
       # Delete objects for matched keys.
