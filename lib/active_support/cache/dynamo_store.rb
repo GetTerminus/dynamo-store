@@ -2,7 +2,7 @@
 
 module ActiveSupport
   module Cache
-    class DynamoStore < Store
+    class Dynamo < Store
 
       ERRORS_TO_RESCUE = [
         Errno::ECONNREFUSED,

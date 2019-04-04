@@ -5,7 +5,7 @@ require "dynamo/active_support/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "dynamo-store"
-  spec.version       = DynamoStore::ActiveSupport::VERSION
+  spec.version       = Dynamo::ActiveSupport::VERSION
   spec.authors       = ["David Harkness"]
   spec.email         = ["david.harkness@terminus.com"]
 
