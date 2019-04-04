@@ -150,11 +150,11 @@ module ActiveSupport
 
       protected
         def read_entry(name, options = nil)
-          Dynamo::Model.read(name)
+          ::Dynamo::Model.read(name)
         end
 
         def write_entry(name, value, options = nil)
-          Dynamo::Model.write(name, value)
+          ::Dynamo::Model.write(name, value)
         end
 
         ##
