@@ -1,3 +1,4 @@
+# Actual Dynamo DB calls need to go here
 class Dynamo
   class Store < self
     def initialize
