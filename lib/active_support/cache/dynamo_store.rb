@@ -53,17 +53,6 @@ module ActiveSupport
         super()
       end
 
-      protected
-      def read_entry(name, options = nil)
-        STDERR << "\n\n #{name}"
-        $global_hash[name]
-      end
-
-      def write_entry(name, value, options = nil)
-        STDERR << "\n\n #{name}, #{value}"
-        $global_hash[name] = value
-      end
-
       # Delete objects for matched keys.
       #
       # Performance note: this operation can be dangerous for large production
@@ -160,19 +149,14 @@ module ActiveSupport
       end
 
       protected
-        def write_entry(key, entry, options)
-          failsafe(:write_entry, returning: false) do
-            method = options && options[:unless_exist] ? :setnx : :set
-            with { |client| client.send method, key, entry, options }
-          end
+        def read_entry(name, options = nil)
+          STDERR << "\n\n #{name}"
+          $global_hash[name]
         end
 
-        def read_entry(key, options)
-          failsafe(:read_entry) do
-            entry = with { |c| c.get key, options }
-            return unless entry
-            entry.is_a?(Entry) ? entry : Entry.new(entry)
-          end
+        def write_entry(name, value, options = nil)
+          STDERR << "\n\n #{name}, #{value}"
+          $global_hash[name] = value
         end
 
         ##
