@@ -4,7 +4,7 @@ class Dynamo
     end
 
     def get(key)
-      blah
+      'dksdk'
     end
 
     def put(key, item)
