@@ -150,13 +150,11 @@ module ActiveSupport
 
       protected
         def read_entry(name, options = nil)
-          STDERR << "\n\n #{name}"
-          $global_hash[name]
+          Dynamo::Model.read(name)
         end
 
         def write_entry(name, value, options = nil)
-          STDERR << "\n\n #{name}, #{value}"
-          $global_hash[name] = value
+          Dynamo::Model.write(name, value)
         end
 
         ##
