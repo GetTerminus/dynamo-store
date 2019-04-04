@@ -1,5 +1,5 @@
 require "bundler/setup"
-require "dynamo-store/active_support/version"
+require "dynamo/store/active_support/version"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

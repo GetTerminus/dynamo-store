@@ -1,7 +1,7 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "dynamo-store/active_support/version"
+require "dynamo/active_support/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "dynamo-store"

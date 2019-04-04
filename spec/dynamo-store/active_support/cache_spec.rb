@@ -1,6 +1,6 @@
-RSpec.describe DynamoStore::ActiveSupport do
+RSpec.describe Dynamo::Store::ActiveSupport do
   it "has a version number" do
-    expect(DynamoStore::ActiveSupport::VERSION).not_to be nil
+    expect(Dynamo::Store::ActiveSupport::VERSION).not_to be nil
   end
 
   it "does something useful" do
