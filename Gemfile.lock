@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    dynamo-cache-store (5.2.0.pre)
+    dynamo-store (5.2.0.pre)
 
 GEM
   remote: https://rubygems.org/
@@ -28,7 +28,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 2.0)
-  dynamo-cache-store!
+  dynamo-store!
   rake (~> 10.0)
   rspec (~> 3.0)
 

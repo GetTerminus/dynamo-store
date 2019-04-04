@@ -1,11 +1,11 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "dynamo-cache/active_support/version"
+require "dynamo-store/active_support/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "dynamo-cache-store"
-  spec.version       = DynamoCache::ActiveSupport::VERSION
+  spec.name          = "dynamo-store"
+  spec.version       = DynamoStore::ActiveSupport::VERSION
   spec.authors       = ["David Harkness"]
   spec.email         = ["david.harkness@terminus.com"]
 
