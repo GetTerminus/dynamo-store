@@ -1,5 +1,5 @@
 PATH
-  remote: .
+  remote: ..
   specs:
     dynamo-store (0.0.1)
       activesupport (> 5.0)
@@ -795,9 +795,9 @@ GEM
 PLATFORMS
   ruby
   x86_64-darwin-17
-  x86_64-darwin-18
 
 DEPENDENCIES
+  activesupport (~> 5.2.0)
   appraisal
   bundler (~> 2.0)
   deep-cover
