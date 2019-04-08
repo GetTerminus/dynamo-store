@@ -24,7 +24,6 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            gem update bundler
             bundle install --jobs=4 --retry=3 --path vendor/bundle
             bundle exec appraisal install
 
@@ -36,7 +35,7 @@ jobs:
       # run tests!
       - run:
           name: run tests
-          command: gem update bundler && bundle exec appraisal rspec
+          command: bundle exec appraisal rspec
 
       # collect reports
       - store_test_results:

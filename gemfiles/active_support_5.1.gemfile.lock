@@ -807,6 +807,3 @@ DEPENDENCIES
   rspec_junit_formatter
   simplecov
   timecop
-
-BUNDLED WITH
-   2.0.1
