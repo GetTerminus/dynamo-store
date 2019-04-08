@@ -8,12 +8,12 @@ require 'dynamo-store/version'
 Gem::Specification.new do |spec|
   spec.name          = 'dynamo-store'
   spec.version       = DynamoStore::VERSION
-  spec.authors       = ['David Harkness']
-  spec.email         = ['david.harkness@terminus.com']
+  spec.authors       = ['David Harkness', 'Brian Malinconico']
+  spec.email         = ['david.harkness@terminus.com', 'brian.malinconico@terminus.com']
 
-  spec.summary       = 'Rails Cache Store for DynamoDb'
-  spec.description   = 'Rails Cache Store for DynamoDb'
-  spec.homepage      = 'http://terminus.com'
+  spec.summary       = 'ActiveSupport Cache Store for DynamoDb'
+  spec.description   = 'ActiveSupport Cache Store for DynamoDb'
+  spec.homepage      = 'https://github.com/GetTerminus/dynamo-store'
   spec.license       = 'MIT'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
