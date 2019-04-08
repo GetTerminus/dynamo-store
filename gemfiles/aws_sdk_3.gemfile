@@ -2,6 +2,6 @@
 
 source "https://rubygems.org"
 
-gem "aws-sdk", "~> 3.0"
+gem "aws-sdk-dynamodb", "~> 1.0"
 
 gemspec path: "../"

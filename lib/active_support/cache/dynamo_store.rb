@@ -1,7 +1,13 @@
 # frozen_string_literal: true
 
 require 'active_support/cache'
+require 'active_support/notifications'
+
+begin
+require 'aws-sdk-dynamodb'
+rescue LoadError
 require 'aws-sdk'
+end
 
 module ActiveSupport
   module Cache

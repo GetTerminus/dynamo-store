@@ -17,5 +17,5 @@ appraise 'aws-sdk-2' do
 end
 
 appraise 'aws-sdk-3' do
-  gem 'aws-sdk', '~> 3.0'
+  gem 'aws-sdk-dynamodb', '~> 1.0'
 end

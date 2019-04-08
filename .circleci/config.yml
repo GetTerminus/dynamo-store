@@ -36,7 +36,7 @@ jobs:
       # run tests!
       - run:
           name: run tests
-          command: bundle exec appraisal rspec
+          command: gem update bundler && bundle exec appraisal rspec
 
       # collect reports
       - store_test_results:

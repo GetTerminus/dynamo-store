@@ -39,12 +39,14 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'activesupport', '> 5.0'
-  spec.add_dependency 'aws-sdk', '~> 2.0'
+  spec.add_dependency 'aws-sdk', '> 2.0'
 
+  spec.add_development_dependency 'appraisal'
   spec.add_development_dependency 'bundler', '~> 2.0'
+  spec.add_development_dependency 'deep-cover'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
-  spec.add_development_dependency 'timecop'
   spec.add_development_dependency 'simplecov'
-  spec.add_development_dependency 'deep-cover'
+  spec.add_development_dependency 'timecop'
+  spec.add_development_dependency 'rspec_junit_formatter'
 end
