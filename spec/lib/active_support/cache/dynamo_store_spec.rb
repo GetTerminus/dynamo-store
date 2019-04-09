@@ -47,6 +47,20 @@ RSpec.describe ActiveSupport::Cache::Dynamo do
       item = client.get_item(key: {CacheKey: 'some_cache'}, table_name: standard_table_name).item
       expect(item['TTL']).to eq(5.minutes.from_now.to_i)
     end
+
+    describe '.delete' do
+      it 'removes an existing item' do
+        store.write('key1', 1)
+
+        expect {
+          store.delete('key1')
+        }.to change { store.read('key1') }.from(1).to(nil)
+      end
+
+      it 'succeeds if a key is not found' do
+        expect { store.delete(SecureRandom.uuid) }.not_to raise_error
+      end
+    end
   end
 
   context 'using a custom configuration' do
