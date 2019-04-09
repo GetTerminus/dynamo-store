@@ -28,7 +28,7 @@ RSpec.describe ActiveSupport::Cache::Dynamo do
     end
 
     let(:store) do
-      ActiveSupport::Cache::Dynamo.new(
+      ActiveSupport::Cache::DynamoStore.new(
         table_name: standard_table_name,
         dynamo_client: client
       )
@@ -78,7 +78,7 @@ RSpec.describe ActiveSupport::Cache::Dynamo do
     end
 
     let(:store) do
-      ActiveSupport::Cache::Dynamo.new(
+      ActiveSupport::Cache::DynamoStore.new(
         table_name: standard_table_name,
         hash_key: 'foo',
         ttl_key: 'baz',
