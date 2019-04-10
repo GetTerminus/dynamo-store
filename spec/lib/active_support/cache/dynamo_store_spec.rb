@@ -3,7 +3,7 @@
 require 'spec_helper'
 require 'dynamo-store'
 
-RSpec.describe ActiveSupport::Cache::Dynamo do
+RSpec.describe ActiveSupport::Cache::DynamoStore do
   let(:client) do
     Aws::DynamoDB::Client.new(
       region: 'us-east-1',
