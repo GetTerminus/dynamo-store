@@ -11,7 +11,7 @@ end
 
 module ActiveSupport
   module Cache
-    class Dynamo < Store
+    class DynamoStore < Store
       DEFAULT_HASH_KEY = 'CacheKey'
       DEFAULT_TTL_KEY = 'TTL'
       CONTENT_KEY = 'item_value'
