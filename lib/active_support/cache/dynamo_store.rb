@@ -14,7 +14,7 @@ module ActiveSupport
     class DynamoStore < Store
       DEFAULT_HASH_KEY = 'CacheKey'
       DEFAULT_TTL_KEY = 'TTL'
-      CONTENT_KEY = 'item_value'
+      CONTENT_KEY = 'b_item_value'
 
       attr_reader :data, :dynamodb_client, :hash_key, :ttl_key, :table_name
 
@@ -53,7 +53,7 @@ module ActiveSupport
           table_name: table_name
         )
 
-        return if result.item.nil?
+        return if result.item.nil? || result.item[CONTENT_KEY].nil?
 
         Marshal.load(result.item[CONTENT_KEY]) # rubocop:disable Security/MarshalLoad
       rescue TypeError
@@ -61,7 +61,10 @@ module ActiveSupport
       end
 
       def write_entry(name, value, _options = nil)
-        item = { hash_key => name, CONTENT_KEY => Marshal.dump(value) }
+        item = {
+          hash_key => name,
+          CONTENT_KEY => StringIO.new(Marshal.dump(value))
+        }
 
         item[ttl_key] = value.expires_at.to_i if value.expires_at
 
