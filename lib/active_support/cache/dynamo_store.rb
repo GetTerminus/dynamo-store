@@ -53,7 +53,7 @@ module ActiveSupport
           table_name: table_name
         )
 
-        return if result.item.nil?
+        return if result.item.nil? || result.item[CONTENT_KEY].nil?
 
         Marshal.load(result.item[CONTENT_KEY]) # rubocop:disable Security/MarshalLoad
       rescue TypeError
