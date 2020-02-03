@@ -105,7 +105,7 @@ PLATFORMS
 DEPENDENCIES
   activesupport (~> 5.2.0)
   appraisal
-  bundler (~> 2.0)
+  bundler (~> 2.1.4)
   deep-cover
   dynamo-store!
   rake (~> 10.0)

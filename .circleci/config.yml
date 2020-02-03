@@ -20,10 +20,10 @@ jobs:
 
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-2.6-{{ checksum "Gemfile.lock" }}
-            - v1-dependencies-2.6-
+      # - restore_cache:
+      #     keys:
+      #       - v1-dependencies-2.6-{{ checksum "Gemfile.lock" }}
+      #       - v1-dependencies-2.6-
       - run:
           name: install dependencies
           command: |
@@ -52,10 +52,10 @@ jobs:
 
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-2.5-{{ checksum "Gemfile.lock" }}
-            - v1-dependencies-2.5-
+      # - restore_cache:
+      #     keys:
+      #       - v1-dependencies-2.5-{{ checksum "Gemfile.lock" }}
+      #       - v1-dependencies-2.5-
       - run:
           name: install dependencies
           command: |
