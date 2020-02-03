@@ -107,7 +107,6 @@ PLATFORMS
 
 DEPENDENCIES
   appraisal
-  bundler (~> 2.1.4)
   deep-cover
   dynamo-store!
   rake (~> 10.0)
