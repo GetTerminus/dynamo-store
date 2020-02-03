@@ -4,4 +4,8 @@ language: ruby
 cache: bundler
 rvm:
   - 2.5.3
-before_install: gem install bundler -v 2.0.1
+before_install: gem install bundler -v 2.1.4
+gemfile:
+  - gemfiles/active_support_5.1.gemfile
+  - gemfiles/active_support_5.2.gemfile
+  - gemfiles/aws_sdk_3.gemfile
