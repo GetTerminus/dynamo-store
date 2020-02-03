@@ -20,15 +20,15 @@ jobs:
 
     steps:
       - checkout
-      # - restore_cache:
-      #     keys:
-      #       - v1-dependencies-2.6-{{ checksum "Gemfile.lock" }}
-      #       - v1-dependencies-2.6-
+      - restore_cache:
+          keys:
+            - v1-dependencies-2.6-{{ checksum "Gemfile.lock" }}
+            - v1-dependencies-2.6-
       - run:
           name: install dependencies
           command: |
             gem install bundler -v2.1.4
-            bundle install --jobs=4
+            bundle install --jobs=4 --retry=3 #--path vendor/bundle
             bundle exec appraisal install
       - save_cache:
           paths:
@@ -52,15 +52,15 @@ jobs:
 
     steps:
       - checkout
-      # - restore_cache:
-      #     keys:
-      #       - v1-dependencies-2.5-{{ checksum "Gemfile.lock" }}
-      #       - v1-dependencies-2.5-
+      - restore_cache:
+          keys:
+            - v1-dependencies-2.5-{{ checksum "Gemfile.lock" }}
+            - v1-dependencies-2.5-
       - run:
           name: install dependencies
           command: |
             gem install bundler -v2.1.4
-            bundle install --jobs=4
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
             bundle exec appraisal install
       - save_cache:
           paths:
