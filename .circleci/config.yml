@@ -27,6 +27,7 @@ jobs:
       - run:
           name: install dependencies
           command: |
+            gem install bundler -v2.1.4
             bundle install --jobs=4 --retry=3 --path vendor/bundle
             bundle exec appraisal install
       - save_cache:
@@ -58,6 +59,7 @@ jobs:
       - run:
           name: install dependencies
           command: |
+            gem install bundler -v2.1.4
             bundle install --jobs=4 --retry=3 --path vendor/bundle
             bundle exec appraisal install
       - save_cache:
