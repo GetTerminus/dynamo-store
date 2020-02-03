@@ -9,8 +9,6 @@ workflows:
   commit:
     jobs:
       - ruby-2.6
-      - ruby-2.5
-
 jobs:
   "ruby-2.6":
     docker:
