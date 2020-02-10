@@ -27,7 +27,7 @@ serverless key-value store offering millisecond recall and write time.
 
 DynamoStore leverages to the DynamoDB TTL column to automatically remove items
 as they reach expiration time, this feature should be enabled, as this adapter
-dose not impalement any manual cleanup steps.
+does not implement any manual cleanup steps.
 
 ### Configuration
 All configuration options are passed during construction of the store. You may
