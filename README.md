@@ -56,6 +56,6 @@ config.cache_store = :dynamo_store, {table_name: 'AppCache'}
 ```ruby
 require 'dynamo-store'
 
-cache = ActiveSupport::Cache::Dynamo.new(table_name: 'AppCache')
+cache = ActiveSupport::Cache::DynamoStore.new(table_name: 'AppCache')
 ```
 
