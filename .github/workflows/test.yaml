@@ -37,7 +37,7 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
-          cache-version: "${{ matrix.ruby }}-0"
+          cache-version: ${{ matrix.ruby }}-0
       - name: Run RSpec
         env:
           DYNAMODB_HOST: http://localhost:${{job.services.dynamodb.ports[8000]}}/
