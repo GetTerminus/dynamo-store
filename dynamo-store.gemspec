@@ -40,6 +40,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'activesupport', '> 5.0'
   spec.add_dependency 'aws-sdk-dynamodb', '> 1.0'
+  spec.add_dependency 'rexml'
 
   spec.add_development_dependency 'appraisal'
   spec.add_development_dependency 'deep-cover'
