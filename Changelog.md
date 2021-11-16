@@ -1,6 +1,6 @@
 # 1.0.1
 
-* Ruby 3 testing, gem updates
+* Ruby 3 support
 
 # 1.0.0
 
