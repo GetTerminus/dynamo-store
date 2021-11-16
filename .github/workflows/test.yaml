@@ -1,0 +1,49 @@
+name: 'Test'
+
+on: push
+
+env:
+  ImageOS: ubuntu18
+  NOKOGIRI_USE_SYSTEM_LIBRARIES: true
+
+jobs:
+  run-tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: ["3.0.2", "2.7.4"]
+    name: Test code
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: asdf
+      AWS_SECRET_ACCESS_KEY: asdf
+      CI: true
+    services:
+      dynamodb:
+        image: amazon/dynamodb-local
+        credentials:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+        ports:
+          - 8000/tcp
+    steps:
+      - name: Install SSH Key
+        uses: webfactory/ssh-agent@v0.4.1
+        with:
+         ssh-private-key: ${{ secrets.GH_ACTIONS_SSH_PRIVATE_KEY }}
+      - name: Pull
+        uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+          cache-version: "${{ matrix.ruby }}-0"
+      - name: Run RSpec
+        env:
+          DYNAMODB_HOST: http://localhost:${{job.services.dynamodb.ports[8000]}}/
+        run: bundle exec rspec
+      - name: Coveralls
+        uses: coverallsapp/github-action@v1.1.2
+        continue-on-error: true
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
