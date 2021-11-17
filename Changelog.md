@@ -1,3 +1,7 @@
+# 1.0.1
+
+* Ruby 3 support
+
 # 1.0.0
 
 * Require aws-sdk > 3.0 so that we can specify a smaller subset of gems

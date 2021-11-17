@@ -1,0 +1,42 @@
+name: Test
+
+on: push
+
+env:
+  ImageOS: ubuntu18
+  NOKOGIRI_USE_SYSTEM_LIBRARIES: true
+
+jobs:
+  run-tests:
+    name: Test code
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby:
+          - 3.0.2
+          - 2.7.4
+    services:
+      dynamodb:
+        image: amazon/dynamodb-local
+        ports:
+          - 8000/tcp
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+          cache-version: ${{ matrix.ruby }}-0
+      - name: Run RSpec
+        env:
+          AWS_ACCESS_KEY_ID: asdf
+          AWS_SECRET_ACCESS_KEY: asdf
+          CI: true
+          DYNAMODB_HOST: http://localhost:${{job.services.dynamodb.ports[8000]}}/
+        run: bundle exec rspec
+      - name: Coveralls
+        uses: coverallsapp/github-action@v1.1.2
+        continue-on-error: true
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}

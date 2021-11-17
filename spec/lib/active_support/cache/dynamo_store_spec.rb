@@ -8,9 +8,9 @@ RSpec.describe ActiveSupport::Cache::DynamoStore do
   let(:client) do
     Aws::DynamoDB::Client.new(
       region: 'us-east-1',
-      endpoint: ENV['DYNAMODB_ENDPOINT'],
-      access_key_id: 'a',
-      secret_access_key: 'b',
+      endpoint: ENV['DYNAMODB_HOST'],
+      access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
     )
   end
 

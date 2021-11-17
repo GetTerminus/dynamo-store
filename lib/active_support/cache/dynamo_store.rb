@@ -73,7 +73,7 @@ module ActiveSupport
         true
       end
 
-      def delete_entry(name, _options)
+      def delete_entry(name, _options = nil)
         dynamodb_client.delete_item(
           key: { hash_key => name },
           table_name: table_name

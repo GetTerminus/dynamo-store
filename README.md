@@ -58,4 +58,3 @@ require 'dynamo-store'
 
 cache = ActiveSupport::Cache::DynamoStore.new(table_name: 'AppCache')
 ```
-
