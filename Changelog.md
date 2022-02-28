@@ -1,6 +1,10 @@
+# 1.0.2.1
+
+Fix load order issue which surfaced from activesupport 7
+
 # 1.0.2
 
-Rake 13 added as requirement
+Rake 13 added as a dev requirement
 
 # 1.0.1
 
