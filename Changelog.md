@@ -1,3 +1,7 @@
+# 1.0.2
+
+Rake 13 added as requirement
+
 # 1.0.1
 
 * Ruby 3 support
