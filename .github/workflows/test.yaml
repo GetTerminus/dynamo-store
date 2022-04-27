@@ -14,8 +14,9 @@ jobs:
       fail-fast: false
       matrix:
         ruby:
-          - 3.1.1
-          - 2.7.5
+          - 3.1.2
+          - 3.0.4
+          - 2.7.6
     services:
       dynamodb:
         image: amazon/dynamodb-local
