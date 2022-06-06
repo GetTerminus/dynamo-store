@@ -5,3 +5,7 @@ inherit_from:
 Metrics/BlockLength:
   Exclude:
     - dynamo-store.gemspec
+
+Naming/FileName:
+  Exclude:
+    - lib/dynamo-store.rb
