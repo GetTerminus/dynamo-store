@@ -5,9 +5,9 @@ require 'active_support/cache'
 require 'active_support/notifications'
 
 begin
-require 'aws-sdk-dynamodb'
+  require 'aws-sdk-dynamodb'
 rescue LoadError
-require 'aws-sdk'
+  require 'aws-sdk'
 end
 
 module ActiveSupport
@@ -51,7 +51,7 @@ module ActiveSupport
       def read_entry(name, _options = nil)
         result = dynamodb_client.get_item(
           key: { hash_key => name },
-          table_name: table_name
+          table_name: table_name,
         )
 
         return if result.item.nil? || result.item[CONTENT_KEY].nil?
@@ -64,7 +64,7 @@ module ActiveSupport
       def write_entry(name, value, _options = nil)
         item = {
           hash_key => name,
-          CONTENT_KEY => StringIO.new(Marshal.dump(value))
+          CONTENT_KEY => StringIO.new(Marshal.dump(value)),
         }
 
         item[ttl_key] = value.expires_at.to_i if value.expires_at
@@ -77,7 +77,7 @@ module ActiveSupport
       def delete_entry(name, _options = nil)
         dynamodb_client.delete_item(
           key: { hash_key => name },
-          table_name: table_name
+          table_name: table_name,
         )
       end
     end

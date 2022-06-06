@@ -1,0 +1,7 @@
+inherit_from:
+  - https://raw.githubusercontent.com/GetTerminus/ruby_shared_configs/master/.rubocop-3-1.yml
+  - .rubocop_todo.yml
+
+Metrics/BlockLength:
+  Exclude:
+    - dynamo-store.gemspec

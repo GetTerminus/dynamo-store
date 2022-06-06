@@ -23,7 +23,7 @@ RSpec.describe ActiveSupport::Cache::DynamoStore do
           ],
           key_schema: [{ attribute_name: 'CacheKey', key_type: 'HASH' }],
           provisioned_throughput: { read_capacity_units: 5, write_capacity_units: 5 },
-          table_name: name
+          table_name: name,
         )
       end
     end
@@ -31,26 +31,26 @@ RSpec.describe ActiveSupport::Cache::DynamoStore do
     let(:store) do
       ActiveSupport::Cache::DynamoStore.new(
         table_name: standard_table_name,
-        dynamo_client: client
+        dynamo_client: client,
       )
     end
 
     it 'round trips an object' do
       expect {
-        store.write(key, [1,2,3])
+        store.write(key, [1, 2, 3])
       }.to change {
         store.read(key)
-      }.from(nil).to([1,2,3])
+      }.from(nil).to([1, 2, 3])
     end
 
     it 'allows setting of expiration' do
-      store.write(key, [1,2,3], expires_in: 5.minutes)
-      item = client.get_item(key: {CacheKey:key}, table_name: standard_table_name).item
+      store.write(key, [1, 2, 3], expires_in: 5.minutes)
+      item = client.get_item(key: { CacheKey: key }, table_name: standard_table_name).item
       expect(item['TTL']).to eq(5.minutes.from_now.to_i)
     end
 
     it 'survives if the field is unset' do
-      client.put_item(item: {CacheKey: key}, table_name: standard_table_name)
+      client.put_item(item: { CacheKey: key }, table_name: standard_table_name)
       expect(store.read(key)).to eq nil
     end
 
@@ -78,7 +78,7 @@ RSpec.describe ActiveSupport::Cache::DynamoStore do
           ],
           key_schema: [{ attribute_name: 'foo', key_type: 'HASH' }],
           provisioned_throughput: { read_capacity_units: 5, write_capacity_units: 5 },
-          table_name: name
+          table_name: name,
         )
       end
     end
@@ -88,21 +88,21 @@ RSpec.describe ActiveSupport::Cache::DynamoStore do
         table_name: standard_table_name,
         hash_key: 'foo',
         ttl_key: 'baz',
-        dynamo_client: client
+        dynamo_client: client,
       )
     end
 
     it 'round trips an object' do
       expect {
-        store.write(key, [1,2,3])
+        store.write(key, [1, 2, 3])
       }.to change {
         store.read(key)
-      }.from(nil).to([1,2,3])
+      }.from(nil).to([1, 2, 3])
     end
 
     it 'allows setting of expiration' do
-      store.write(key, [1,2,3], expires_in: 5.minutes)
-      item = client.get_item(key: {foo:key}, table_name: standard_table_name).item
+      store.write(key, [1, 2, 3], expires_in: 5.minutes)
+      item = client.get_item(key: { foo: key }, table_name: standard_table_name).item
       expect(item['baz']).to eq(5.minutes.from_now.to_i)
     end
   end
