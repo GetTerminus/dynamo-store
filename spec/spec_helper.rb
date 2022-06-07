@@ -6,7 +6,6 @@ require 'timecop'
 require 'deep_cover/builtin_takeover'
 require 'simplecov'
 
-
 SimpleCov.start do
   add_filter '/vendor/'
   add_filter '/spec/'

@@ -1,0 +1,91 @@
+AllCops:
+  Exclude:
+    - Makefile
+    - vendor/**/*
+    - bin/**/*
+
+Layout/EndOfLine:
+  Enabled: false
+
+Style/DateTime:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Lint/Debugger:
+  Enabled: true
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+  EnforcedStyle: always
+
+Style/TrailingCommaInHashLiteral:
+  Enabled: true
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInArrayLiteral:
+  Enabled: true
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInArguments:
+  Enabled: true
+  EnforcedStyleForMultiline: comma
+
+Lint/UnusedMethodArgument:
+  AllowUnusedKeywordArguments: true
+
+Layout/LineLength:
+  Enabled: true
+  Max: 280
+  IgnoreCopDirectives: true
+  IgnoredPatterns: ['\A#', '\A\s*sig { .* }\Z']
+  Exclude:
+    - '**/*_pb.rb'
+
+Metrics/AbcSize:
+  Enabled: true
+  Max: 48
+
+Metrics/CyclomaticComplexity:
+  Max: 9
+
+Metrics/MethodLength:
+  Enabled: true
+  Max: 32
+
+Layout/ParameterAlignment:
+  Enabled: true
+  EnforcedStyle: with_fixed_indentation
+
+Naming/MethodParameterName:
+  Enabled: true
+  AllowedNames: ['io', 'id', 'to', 'by', 'on', 'in', 'at', '_'] # Defaults + _
+
+Layout/MultilineMethodCallIndentation:
+  Enabled: true
+  EnforcedStyle: indented
+
+Style/ParallelAssignment:
+  Enabled: true
+
+Metrics/ClassLength:
+  Max: 240
+
+Metrics/BlockLength:
+  Max: 30
+  Exclude:
+    - spec/**/*.rb
+    - '**/*_pb.rb'
+
+Metrics/ParameterLists:
+  Max: 6
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - spec/**/*.rb
+
+Style/BlockDelimiters:
+  Enabled: true
+  Exclude:
+    - spec/**/*
