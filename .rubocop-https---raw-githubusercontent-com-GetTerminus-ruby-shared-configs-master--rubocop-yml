@@ -39,7 +39,7 @@ Layout/LineLength:
   Enabled: true
   Max: 280
   IgnoreCopDirectives: true
-  IgnoredPatterns: ['\A#', '\A\s*sig { .* }\Z']
+  AllowedPatterns: ['\A#', '\A\s*sig { .* }\Z']
   Exclude:
     - '**/*_pb.rb'
 
