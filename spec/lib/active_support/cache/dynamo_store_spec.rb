@@ -67,6 +67,30 @@ RSpec.describe ActiveSupport::Cache::DynamoStore do
         expect { store.delete(SecureRandom.uuid) }.not_to raise_error
       end
     end
+
+    describe 'throw exception' do
+      let(:store) do
+        ActiveSupport::Cache::DynamoStore.new(
+          table_name: "#{standard_table_name}-invalid",
+          dynamo_client: client,
+        )
+      end
+
+      it 'write error handle' do
+        expect(store.error_handler).to receive(:call).with(method: :write_entry, returning: false, exception: kind_of(Aws::DynamoDB::Errors::ServiceError))
+        store.write(key, 'test')
+      end
+
+      it 'read error handle' do
+        expect(store.error_handler).to receive(:call).with(method: :read_entry, returning: nil, exception: kind_of(Aws::DynamoDB::Errors::ServiceError))
+        store.read(key)
+      end
+
+      it 'delete error handle' do
+        expect(store.error_handler).to receive(:call).with(method: :delete_entry, returning: nil, exception: kind_of(Aws::DynamoDB::Errors::ServiceError))
+        store.delete(key)
+      end
+    end
   end
 
   context 'using a custom configuration' do

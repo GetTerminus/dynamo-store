@@ -17,7 +17,11 @@ module ActiveSupport
       DEFAULT_TTL_KEY = 'TTL'
       CONTENT_KEY = 'b_item_value'
 
-      attr_reader :data, :dynamodb_client, :hash_key, :ttl_key, :table_name
+      attr_reader :data, :dynamodb_client, :hash_key, :ttl_key, :table_name, :error_handler
+
+      DEFAULT_ERROR_HANDLER = lambda { |method:, returning:, exception:|
+        logger&.error { "DynamoStore: #{method} failed, returned #{returning.inspect}: #{exception.class}: #{exception.message}" }
+      }
 
       # Instantiate the store.
       #
@@ -37,6 +41,7 @@ module ActiveSupport
         dynamo_client: nil,
         hash_key: DEFAULT_HASH_KEY,
         ttl_key: DEFAULT_TTL_KEY,
+        error_handler: DEFAULT_ERROR_HANDLER,
         **opts
       )
         super(opts)
@@ -44,17 +49,20 @@ module ActiveSupport
         @dynamodb_client = dynamo_client || Aws::DynamoDB::Client.new
         @ttl_key         = ttl_key
         @hash_key        = hash_key
+        @error_handler = error_handler
       end
 
       protected
 
       def read_entry(name, _options = nil)
-        result = dynamodb_client.get_item(
-          key: { hash_key => name },
-          table_name: table_name,
-        )
+        result = failsafe :read_entry do
+          dynamodb_client.get_item(
+            key: { hash_key => name },
+            table_name: table_name,
+          )
+        end
 
-        return if result.item.nil? || result.item[CONTENT_KEY].nil?
+        return if result.nil? || result.item.nil? || result.item[CONTENT_KEY].nil?
 
         Marshal.load(result.item[CONTENT_KEY]) # rubocop:disable Security/MarshalLoad
       rescue TypeError
@@ -69,16 +77,29 @@ module ActiveSupport
 
         item[ttl_key] = value.expires_at.to_i if value.expires_at
 
-        dynamodb_client.put_item(item: item, table_name: table_name)
+        failsafe(:write_entry, returning: false) do
+          dynamodb_client.put_item(item: item, table_name: table_name)
+        end
 
         true
       end
 
       def delete_entry(name, _options = nil)
-        dynamodb_client.delete_item(
-          key: { hash_key => name },
-          table_name: table_name,
-        )
+        failsafe :delete_entry do
+          dynamodb_client.delete_item(
+            key: { hash_key => name },
+            table_name: table_name,
+          )
+        end
+      end
+
+      private
+
+      def failsafe(method, returning: nil)
+        yield
+      rescue Aws::DynamoDB::Errors::ServiceError => e
+        error_handler&.call(method: method, exception: e, returning: returning)
+        returning
       end
     end
   end
